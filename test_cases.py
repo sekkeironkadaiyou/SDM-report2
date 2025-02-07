@@ -1,21 +1,38 @@
 #!/usr/bin/python3
 
 import unittest
-from calc_mul import calc
+from calc import calc  # calc関数をimport
 
-# Run with testrunner so needs to be in file test_
+class TestCalc(unittest.TestCase):
+    def test_valid_values(self):
+        self.assertEqual(calc(1, 1), 1)  
+        self.assertEqual(calc(999, 999), 999 * 999)  
+        self.assertEqual(calc(1, 500), 500)  
+        self.assertEqual(calc(999, 1), 999)  
+        self.assertEqual(calc(500, 500), 250000)  
 
-class TestCalc (unittest.TestCase):
+    def test_out_of_range_values(self):
+        self.assertEqual(calc(0, 500), -1)
+        self.assertEqual(calc(1000, 1), -1)
+        self.assertEqual(calc(1, 1000), -1)
 
-        def test_sample1 (self):
-                self.assertEqual (21, calc(3,7))
+    def test_float_values(self):
+        self.assertEqual(calc(0.1, 999), -1)
+        self.assertEqual(calc(999.9, 500), -1)
 
-        def test_sample2 (self):
-                self.assertEqual (-1, calc(0,150))
+    def test_string_values(self):
+        self.assertEqual(calc("100", 999), -1)
+        self.assertEqual(calc(999, "abc"), -1)
 
-        def test_sample3 (self):
-                self.assertEqual (-1, calc('a','b'))
+    def test_negative_values(self):
+        self.assertEqual(calc(-1, 500), -1)
+        self.assertEqual(calc(999, -1), -1)
 
-        def test_sample4 (self):
-                self.assertEqual (-1, calc(0.1,999))
+    def test_invalid_types(self):
+        self.assertEqual(calc(None, 1), -1)
+        self.assertEqual(calc([], 1), -1)
+        self.assertEqual(calc(1, {}), -1)
+
+if __name__ == "__main__":
+    unittest.main()
 
