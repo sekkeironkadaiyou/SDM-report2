@@ -1,38 +1,50 @@
 #!/usr/bin/python3
 
 import unittest
-from calc import calc  # calc関数をimport
+from calc_mul import calc
 
-class TestCalc(unittest.TestCase):
-    def test_valid_values(self):
-        self.assertEqual(calc(1, 1), 1)  
-        self.assertEqual(calc(999, 999), 999 * 999)  
-        self.assertEqual(calc(1, 500), 500)  
-        self.assertEqual(calc(999, 1), 999)  
-        self.assertEqual(calc(500, 500), 250000)  
+# Run with testrunner so needs to be in file test_
 
-    def test_out_of_range_values(self):
-        self.assertEqual(calc(0, 500), -1)
-        self.assertEqual(calc(1000, 1), -1)
-        self.assertEqual(calc(1, 1000), -1)
+class TestCalc (unittest.TestCase):
 
-    def test_float_values(self):
-        self.assertEqual(calc(0.1, 999), -1)
-        self.assertEqual(calc(999.9, 500), -1)
+        def test_sample1 (self):
+                self.assertEqual (21, calc(3,7))
 
-    def test_string_values(self):
-        self.assertEqual(calc("100", 999), -1)
-        self.assertEqual(calc(999, "abc"), -1)
+        def test_sample2 (self):
+                self.assertEqual (-1, calc(0,150))
 
-    def test_negative_values(self):
-        self.assertEqual(calc(-1, 500), -1)
-        self.assertEqual(calc(999, -1), -1)
+        def test_sample3 (self):
+                self.assertEqual (-1, calc('a','b'))
 
-    def test_invalid_types(self):
-        self.assertEqual(calc(None, 1), -1)
-        self.assertEqual(calc([], 1), -1)
-        self.assertEqual(calc(1, {}), -1)
+        def test_sample4 (self):
+                self.assertEqual (-1, calc(0.5,999))
 
-if __name__ == "__main__":
-    unittest.main()
+        def test_sample5 (self):
+                self.assertEqual (1, calc(1,1))
 
+        def test_sample6 (self):
+                self.assertEqual (998001, calc(999,999))
+
+        def test_sample7 (self):
+                self.assertEqual (-1, calc(0,0))
+
+        def test_sample8 (self):
+                self.assertEqual (-1, calc(1000,1000))
+
+        def test_sample9 (self):
+                self.assertEqual (-1, calc(-1,999))
+
+        def test_sample10 (self):
+                self.assertEqual (-1, calc(5,2000))
+
+        def test_sample11 (self):
+                self.assertEqual (-1, calc('B','998'))
+
+        def test_sample12 (self):
+                self.assertEqual (-1, calc(0.123,500))
+
+        def test_sample13 (self):
+                self.assertEqual (-1, calc(1,None))
+
+        def test_sample12 (self):
+                self.assertEqual (-1, calc(20,'a1'))
